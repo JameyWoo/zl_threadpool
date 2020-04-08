@@ -12,7 +12,7 @@
 #include <vector>
 
 // C++11 版的 线程池
-namespace zl {
+namespace uranus {
 class ThreadsGuard {
    public:
 	ThreadsGuard(std::vector<std::thread>& v)
@@ -70,7 +70,7 @@ class ThreadPool {
 
 	std::queue<task_type> tasks_;
 	std::vector<std::thread> threads_;
-	zl::ThreadsGuard tg_;
+	uranus::ThreadsGuard tg_;
 };
 
 inline ThreadPool::ThreadPool(int n)
@@ -105,7 +105,7 @@ ThreadPool::add(Function&& fcn, Args&&... args) {
 	typedef typename std::result_of<Function(Args...)>::type return_type;
 	typedef std::packaged_task<return_type()> task;
 
-	auto t   = std::make_shared<task>(std::bind(std::forward<Function>(fcn), std::forward<Args>(args)...));
+	auto t	 = std::make_shared<task>(std::bind(std::forward<Function>(fcn), std::forward<Args>(args)...));
 	auto ret = t->get_future();
 	{
 		std::lock_guard<std::mutex> lg(mtx_);
@@ -116,6 +116,6 @@ ThreadPool::add(Function&& fcn, Args&&... args) {
 	cond_.notify_one();
 	return ret;
 }
-}  // namespace zl
+}  // namespace uranus
 
 #endif /* THREAD_POOL_H */

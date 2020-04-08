@@ -6,14 +6,16 @@ using namespace std;
 int main() {
 	std::mutex mtx;
 	try {
-		zl::ThreadPool tp;
+		uranus::ThreadPool tp;
 		std::vector<std::future<int>> v;
 		std::vector<std::future<void>> v1;
 		for (int i = 0; i <= 10; ++i) {
+			// 添加任务(返回参数值)
 			auto ans = tp.add([](int answer) { return answer; }, i);
 			v.push_back(std::move(ans));
 		}
 		for (int i = 0; i <= 5; ++i) {
+			// 添加任务, 打印 hello world
 			auto ans = tp.add([&mtx](const std::string& str1, const std::string& str2) {
 				std::lock_guard<std::mutex> lg(mtx);
 				std::cout << (str1 + str2) << std::endl;
