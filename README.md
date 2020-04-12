@@ -1,6 +1,6 @@
-# zl_threadpool : 三个版本的线程池实现
+# uranus_threadpool : 三个版本的线程池实现
 
-[![Build Status](https://travis-ci.org/lizhenghn123/zl_threadpool.svg?branch=master)](https://api.travis-ci.org/lizhenghn123/zl_threadpool.svg?branch=master)
+[![Build Status](https://travis-ci.org/lizhenghn123/uranus_threadpool.svg?branch=master)](https://api.travis-ci.org/lizhenghn123/uranus_threadpool.svg?branch=master)
 
 **Linux平台下C++(C++98、C++03、C++11)实现的线程池**
 

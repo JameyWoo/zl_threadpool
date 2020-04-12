@@ -4,9 +4,10 @@
 #include <functional>  // for std::function, std::bind
 
 // 使用C++03/C++0x 语言规范实现的线程池： 基于对象做法，每一个job都是一个function对象
-namespace zl {
+namespace uranus {
 class ThreadPool {
    public:
+   // 一个任务是一个函数
 	typedef std::function<void()> Task;
 
    public:
@@ -36,4 +37,4 @@ class ThreadPool {
 	pthread_mutex_t mutex_;
 	pthread_cond_t condition_;
 };
-}  // namespace zl
+}  // namespace uranus

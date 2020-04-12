@@ -6,6 +6,7 @@
 
 #include "ThreadPool.h"
 
+// 任务类
 class MyTask {
    public:
 	MyTask() {}
@@ -17,11 +18,17 @@ class MyTask {
 	}
 };
 
+void fuck(int i, const char* p) {
+	printf("fuck thread[%lu] : (%d, %s)\n", pthread_self(), i, (char*)p);
+}
+
 int main() {
-	zl::ThreadPool threadPool(10);
+	uranus::ThreadPool threadPool(4);
 	MyTask taskObj[20];
 	for (int i = 0; i < 20; i++) {
-		threadPool.addTask(std::bind(&MyTask::run, &taskObj[i], i, "helloworld"));
+		// bind是函数适配器, 减少参数
+		// threadPool.addTask(std::bind(&MyTask::run, &taskObj[i], i, "helloworld"));
+		threadPool.addTask(std::bind(&fuck, i, "joke"));
 	}
 
 	while (1) {
